@@ -1,0 +1,30 @@
+﻿@model PlanesDeViajes.Models.ViewModels.NuevoPlanViewModel
+
+@{
+    ViewBag.Title = "Agrega plan";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Agrega", "Planes", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(d => d.Nombre)
+                @Html.TextBoxFor(d => d.Nombre, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Nombre, "", new { @class = "error" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(d => d.Cupo)
+                @Html.TextBoxFor(d => d.Cupo, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Cupo, "", new { @class = "error" })
+            </div>
+            
+            <div style="text-align: right; padding:10px; ">
+                <input class="btn btn-success" value="Guardar" type="submit" />
+            </div>
+
+        </div>
+    </div>
+}

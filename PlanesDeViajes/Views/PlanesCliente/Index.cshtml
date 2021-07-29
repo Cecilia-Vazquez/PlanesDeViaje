@@ -1,0 +1,43 @@
+﻿
+
+@model List<PlanesDeViajes.Models.ViewModels.PlanesViewModel>
+
+@{
+    ViewBag.Title = "Planes De Viaje";
+}
+
+<h1 class="h1" style="text-align:center;">@ViewBag.Title</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>Plan de viaje</th>
+
+                <th>Cupo</th>
+                <th></th>
+            </tr>
+            @foreach (var plan in Model)
+            {
+                <tr>
+                    <td>@plan.IdPlan</td>
+                    <td>@plan.Nombre</td>
+
+                    <td>@plan.Cupo</td>
+                    <td>
+                       
+
+
+                        <a href="Planes//@plan.IdPlan" class="btn btn-primary">Hoteles</a>
+                       
+
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+

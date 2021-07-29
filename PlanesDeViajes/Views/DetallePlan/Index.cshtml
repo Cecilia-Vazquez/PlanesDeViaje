@@ -1,0 +1,41 @@
+﻿
+@model List<PlanesDeViajes.Models.ViewModels.DetallePlanViewModel>
+
+@{
+    ViewBag.Title = "Detalles De Viaje";
+}
+
+<h1 class="h1" style="text-align:center;">@ViewBag.Title</h1>
+<div style="text-align:right; padding:10px">
+    <a href="https://localhost:44351/DetallePlan/Agrega" class="btn btn-success"> + Agregar Hotel </a>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>Plan de viaje</th>
+
+                <th>Hotel</th>
+                <th>Descripcion</th>
+                <th></th>
+            </tr>
+            @foreach (var detalle in Model)
+            {
+        <tr>
+            <td>@detalle.IdDetalle</td>
+            <td>@detalle.Planes.Nombre</td>
+
+            <td>@detalle.Hoteles.Locacion</td>
+
+            <td>@detalle.Descripcion</td>
+            <td>
+                <a href="/DetallePlan/Editar/@detalle.IdDetalle" class="btn btn-warning">Modificar</a>
+                <a href="/DetallePlan/Eliminar/@detalle.IdDetalle" class="btn bg-danger">Eliminar</a>
+            </td>
+        </tr>
+            }
+
+        </table>
+    </div>
+</div>

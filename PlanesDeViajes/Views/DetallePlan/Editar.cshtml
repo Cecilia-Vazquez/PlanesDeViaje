@@ -1,0 +1,45 @@
+﻿@model PlanesDeViajes.Models.ViewModels.NuevoDetallePlanViewModel
+@{
+    ViewBag.Title = "Editar Detalles del Plan";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("Editar", "DetallePlan", FormMethod.Post))
+{
+
+    <div class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor(d => d.IdPlan)
+
+            <div class="form-group">
+                @Html.LabelFor(d => d.IdDetalle)
+                @Html.TextBoxFor(d => d.IdDetalle, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.IdDetalle, "", new { @class = "error" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(d => d.IdPlan)
+                @Html.TextBoxFor(d => d.IdPlan, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.IdPlan, "", new { @class = "error" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(d => d.IdHotel)
+                @Html.TextBoxFor(d => d.IdHotel, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.IdHotel, "", new { @class = "error" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(d => d.Descripcion)
+                @Html.TextBoxFor(d => d.Descripcion, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Descripcion, "", new { @class = "error" })
+            </div>
+
+
+            <div style="text-align: right; padding:10px; ">
+                <input class="btn btn-success" value="Guardar" type="submit" />
+            </div>
+
+        </div>
+    </div>
+}

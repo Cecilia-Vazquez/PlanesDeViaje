@@ -1,0 +1,43 @@
+﻿@model PlanesDeViajes.Models.ViewModels.NuevoDetallePlanViewModel
+
+@{
+    ViewBag.Title = "Agrega Hotel al plan";
+    List<SelectListItem> items = ViewBag.items;
+    List<SelectListItem> itemsp = ViewBag.itemsp;
+    }
+
+    <h2>@ViewBag.Title</h2>
+
+    @using (Html.BeginForm("Agrega", "DetallePlan", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-md-12">
+
+               
+                <div class="form-group">
+                    @Html.LabelFor(d => d.IdPlan)
+                    @Html.DropDownListFor(d => d.IdPlan, itemsp, "Elige un plan", new { @class = "form-control" })
+              
+                    @Html.ValidationMessageFor(d => d.IdPlan, "", new { @class = "error" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(p => p.IdHotel)
+                    @Html.DropDownListFor(d => d.IdHotel, items, "Elige un hotel", new { @class = "form-control" })
+                   
+                    @Html.ValidationMessageFor(d => d.IdHotel, "", new { @class = "error" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(d => d.Descripcion)
+                    @Html.TextBoxFor(d => d.Descripcion, "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.Descripcion, "", new { @class = "error" })
+                </div>
+
+
+                <div style="text-align: right; padding:10px; ">
+                    <input class="btn btn-success" value="Guardar" type="submit" />
+                </div>
+
+            </div>
+        </div>
+    }

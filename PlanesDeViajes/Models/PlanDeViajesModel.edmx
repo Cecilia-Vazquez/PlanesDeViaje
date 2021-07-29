@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PlanDeViajeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Hoteles">
+          <Key>
+            <PropertyRef Name="IdHotel" />
+          </Key>
+          <Property Name="IdHotel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Locacion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Plan_Detalle">
+          <Key>
+            <PropertyRef Name="IdDetalle" />
+          </Key>
+          <Property Name="IdDetalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdHotel" Type="int" />
+          <Property Name="IdPlan" Type="int" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Planes">
+          <Key>
+            <PropertyRef Name="IdPlan" />
+          </Key>
+          <Property Name="IdPlan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Cupo" Type="int" />
+        </EntityType>
+        <EntityType Name="Reservaciones">
+          <Key>
+            <PropertyRef Name="IdReservacion" />
+          </Key>
+          <Property Name="IdReservacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDetalle" Type="int" Nullable="false" />
+          <Property Name="Cliente" Type="varchar" MaxLength="50" />
+          <Property Name="Correo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Plan_Detalle_Hoteles">
+          <End Role="Hoteles" Type="Self.Hoteles" Multiplicity="0..1" />
+          <End Role="Plan_Detalle" Type="Self.Plan_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hoteles">
+              <PropertyRef Name="IdHotel" />
+            </Principal>
+            <Dependent Role="Plan_Detalle">
+              <PropertyRef Name="IdHotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plan_Detalle_Planes">
+          <End Role="Planes" Type="Self.Planes" Multiplicity="0..1" />
+          <End Role="Plan_Detalle" Type="Self.Plan_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planes">
+              <PropertyRef Name="IdPlan" />
+            </Principal>
+            <Dependent Role="Plan_Detalle">
+              <PropertyRef Name="IdPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservaciones_Plan_Detalle">
+          <End Role="Plan_Detalle" Type="Self.Plan_Detalle" Multiplicity="1" />
+          <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan_Detalle">
+              <PropertyRef Name="IdDetalle" />
+            </Principal>
+            <Dependent Role="Reservaciones">
+              <PropertyRef Name="IdDetalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PlanDeViajeModelStoreContainer">
+          <EntitySet Name="Hoteles" EntityType="Self.Hoteles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plan_Detalle" EntityType="Self.Plan_Detalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Planes" EntityType="Self.Planes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Plan_Detalle_Hoteles" Association="Self.FK_Plan_Detalle_Hoteles">
+            <End Role="Hoteles" EntitySet="Hoteles" />
+            <End Role="Plan_Detalle" EntitySet="Plan_Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plan_Detalle_Planes" Association="Self.FK_Plan_Detalle_Planes">
+            <End Role="Planes" EntitySet="Planes" />
+            <End Role="Plan_Detalle" EntitySet="Plan_Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservaciones_Plan_Detalle" Association="Self.FK_Reservaciones_Plan_Detalle">
+            <End Role="Plan_Detalle" EntitySet="Plan_Detalle" />
+            <End Role="Reservaciones" EntitySet="Reservaciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PlanDeViajeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Hoteles">
+          <Key>
+            <PropertyRef Name="IdHotel" />
+          </Key>
+          <Property Name="IdHotel" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Locacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Plan_Detalle" Relationship="Self.FK_Plan_Detalle_Hoteles" FromRole="Hoteles" ToRole="Plan_Detalle" />
+        </EntityType>
+        <EntityType Name="Plan_Detalle">
+          <Key>
+            <PropertyRef Name="IdDetalle" />
+          </Key>
+          <Property Name="IdDetalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdHotel" Type="Int32" />
+          <Property Name="IdPlan" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Hoteles" Relationship="Self.FK_Plan_Detalle_Hoteles" FromRole="Plan_Detalle" ToRole="Hoteles" />
+          <NavigationProperty Name="Planes" Relationship="Self.FK_Plan_Detalle_Planes" FromRole="Plan_Detalle" ToRole="Planes" />
+          <NavigationProperty Name="Reservaciones" Relationship="Self.FK_Reservaciones_Plan_Detalle" FromRole="Plan_Detalle" ToRole="Reservaciones" />
+        </EntityType>
+        <EntityType Name="Planes">
+          <Key>
+            <PropertyRef Name="IdPlan" />
+          </Key>
+          <Property Name="IdPlan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cupo" Type="Int32" />
+          <NavigationProperty Name="Plan_Detalle" Relationship="Self.FK_Plan_Detalle_Planes" FromRole="Planes" ToRole="Plan_Detalle" />
+        </EntityType>
+        <EntityType Name="Reservaciones">
+          <Key>
+            <PropertyRef Name="IdReservacion" />
+          </Key>
+          <Property Name="IdReservacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDetalle" Type="Int32" Nullable="false" />
+          <Property Name="Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Plan_Detalle" Relationship="Self.FK_Reservaciones_Plan_Detalle" FromRole="Reservaciones" ToRole="Plan_Detalle" />
+        </EntityType>
+        <Association Name="FK_Plan_Detalle_Hoteles">
+          <End Role="Hoteles" Type="Self.Hoteles" Multiplicity="0..1" />
+          <End Role="Plan_Detalle" Type="Self.Plan_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hoteles">
+              <PropertyRef Name="IdHotel" />
+            </Principal>
+            <Dependent Role="Plan_Detalle">
+              <PropertyRef Name="IdHotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plan_Detalle_Planes">
+          <End Role="Planes" Type="Self.Planes" Multiplicity="0..1" />
+          <End Role="Plan_Detalle" Type="Self.Plan_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planes">
+              <PropertyRef Name="IdPlan" />
+            </Principal>
+            <Dependent Role="Plan_Detalle">
+              <PropertyRef Name="IdPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservaciones_Plan_Detalle">
+          <End Role="Plan_Detalle" Type="Self.Plan_Detalle" Multiplicity="1" />
+          <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan_Detalle">
+              <PropertyRef Name="IdDetalle" />
+            </Principal>
+            <Dependent Role="Reservaciones">
+              <PropertyRef Name="IdDetalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PlanDeViajeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Hoteles" EntityType="Self.Hoteles" />
+          <EntitySet Name="Plan_Detalle" EntityType="Self.Plan_Detalle" />
+          <EntitySet Name="Planes" EntityType="Self.Planes" />
+          <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" />
+          <AssociationSet Name="FK_Plan_Detalle_Hoteles" Association="Self.FK_Plan_Detalle_Hoteles">
+            <End Role="Hoteles" EntitySet="Hoteles" />
+            <End Role="Plan_Detalle" EntitySet="Plan_Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plan_Detalle_Planes" Association="Self.FK_Plan_Detalle_Planes">
+            <End Role="Planes" EntitySet="Planes" />
+            <End Role="Plan_Detalle" EntitySet="Plan_Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservaciones_Plan_Detalle" Association="Self.FK_Reservaciones_Plan_Detalle">
+            <End Role="Plan_Detalle" EntitySet="Plan_Detalle" />
+            <End Role="Reservaciones" EntitySet="Reservaciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PlanDeViajeModelStoreContainer" CdmEntityContainer="PlanDeViajeEntities">
+          <EntitySetMapping Name="Hoteles">
+            <EntityTypeMapping TypeName="PlanDeViajeModel.Hoteles">
+              <MappingFragment StoreEntitySet="Hoteles">
+                <ScalarProperty Name="IdHotel" ColumnName="IdHotel" />
+                <ScalarProperty Name="Locacion" ColumnName="Locacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plan_Detalle">
+            <EntityTypeMapping TypeName="PlanDeViajeModel.Plan_Detalle">
+              <MappingFragment StoreEntitySet="Plan_Detalle">
+                <ScalarProperty Name="IdDetalle" ColumnName="IdDetalle" />
+                <ScalarProperty Name="IdHotel" ColumnName="IdHotel" />
+                <ScalarProperty Name="IdPlan" ColumnName="IdPlan" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Planes">
+            <EntityTypeMapping TypeName="PlanDeViajeModel.Planes">
+              <MappingFragment StoreEntitySet="Planes">
+                <ScalarProperty Name="IdPlan" ColumnName="IdPlan" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cupo" ColumnName="Cupo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservaciones">
+            <EntityTypeMapping TypeName="PlanDeViajeModel.Reservaciones">
+              <MappingFragment StoreEntitySet="Reservaciones">
+                <ScalarProperty Name="IdReservacion" ColumnName="IdReservacion" />
+                <ScalarProperty Name="IdDetalle" ColumnName="IdDetalle" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

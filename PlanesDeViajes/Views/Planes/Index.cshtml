@@ -1,0 +1,48 @@
+﻿
+@model List<PlanesDeViajes.Models.ViewModels.PlanesViewModel>
+
+@{
+    ViewBag.Title = "Planes De Viaje";
+}
+
+<h1 class="h1" style="text-align:center;">@ViewBag.Title</h1>
+<div style="text-align:right; padding:10px">
+    <a href="Planes/Agrega" class="btn btn-success"> + Agregar Plan</a>
+</div>
+<div style="text-align:right; padding:10px">
+
+    <a href="/DetallePlan/Index" class="btn bg-success"> Ver Hoteles</a>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>Plan de viaje</th>
+           
+                <th>Cupo</th>
+                <th></th>
+            </tr>
+            @foreach (var plan in Model)
+            {
+                <tr>
+                    <td>@plan.IdPlan</td>
+                    <td>@plan.Nombre</td>
+            
+                    <td>@plan.Cupo</td>
+                    <td>
+                        <a href="Planes/DetallesPlan?id=@plan.IdPlan" class="btn btn-primary">Agregar Detalles</a>
+                    
+
+                        <a href="Planes/Editar/@plan.IdPlan" class="btn btn-warning">Modificar</a>
+                        <a href="Planes/Eliminar/@plan.IdPlan" class="btn btn-danger">Eliminar</a>
+
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
