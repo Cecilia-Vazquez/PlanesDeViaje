@@ -1,0 +1,39 @@
+﻿
+@model List<PlanesDeViajes.Models.ViewModels.ReservacionesViewModel>
+
+@{
+    ViewBag.Title = "Reservaciones";
+}
+
+<h1 class="h1" style="text-align:center;">@ViewBag.Title</h1>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>Plan de viaje</th>
+
+                <th>Hotel</th>
+                <th>Cliente</th>
+                <th>Correo</th>
+            </tr>
+            @foreach (var reservaciones in Model)
+            {
+        <tr>
+            <td>@reservaciones.IdReservacion</td>
+            <td>@reservaciones.Detalles.Planes.Nombre</td>
+            <td>@reservaciones.Detalles.Hoteles.Locacion</td>
+            <td>@reservaciones.Cliente</td>
+
+            <td>@reservaciones.Correo</td>
+        </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+

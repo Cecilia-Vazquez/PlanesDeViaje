@@ -172,6 +172,7 @@
     <Compile Include="Models\ViewModels\NuevoReservacionesViewModel.cs" />
     <Compile Include="Models\ViewModels\PlanesViewModel.cs" />
     <Compile Include="Models\ViewModels\ReservacionesViewModel.cs" />
+    <Compile Include="Models\Notificaciones\Email.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +242,8 @@
     <Content Include="Views\PlanesCliente\VerDisponibilidad.cshtml" />
     <Content Include="Views\PlanesCliente\VerHabitaciones.cshtml" />
     <Content Include="Views\PlanesCliente\Reserva.cshtml" />
+    <Content Include="Views\PlanesCliente\Notificacion.cshtml" />
+    <Content Include="Views\Planes\VerReservaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

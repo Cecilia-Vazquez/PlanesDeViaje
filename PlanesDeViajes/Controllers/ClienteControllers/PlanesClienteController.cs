@@ -2,10 +2,12 @@
 using PlanesDeViajes.APIs;
 using PlanesDeViajes.Models;
 using PlanesDeViajes.Models.ViewModels;
+using PlanesDeViajes.Notificaciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -117,7 +119,7 @@ namespace PlanesDeViajes.Controllers.ClienteControllers
             return View();
         }
 
-      
+
         [HttpPost]
         public ActionResult Reserva(NuevoReservacionesViewModel model)
         {
@@ -137,25 +139,57 @@ namespace PlanesDeViajes.Controllers.ClienteControllers
 
                         dbcontext.Reservaciones.Add(reservacion);
                         dbcontext.SaveChanges();
+                        var mensaje = new MailMessage();
+                        mensaje.Subject = "Reservacion Plan De viaje";
+                        mensaje.Body = "Hola!\n" + model.Cliente +
+                            " Gracias Por Reservar \n" +
+                            "Su Reservación fue exitosa!";
 
+                        mensaje.To.Add(model.Correo);
+                        mensaje.IsBodyHtml = true;
+                        var smtp = new SmtpClient();
+                        smtp.Send(mensaje);
 
                     }
 
+                   
 
+                   
                 }
                 catch (Exception e)
                 {
                     throw new Exception(e.Message);
                 }
+
                 return Redirect("/PlanesCliente");
             }
 
             return View(model);
 
         }
+        public ActionResult Notificacion()
+        {
+            return View();
+        }
+
+            [HttpPost]
+        public ActionResult Notificacion(Email model)
+        {
+            var mensaje = new MailMessage();
+            mensaje.Subject = model.Asunto;
+            mensaje.Body = model.Mensaje;
+            mensaje.To.Add(model.Destino);
+
+            mensaje.IsBodyHtml = true;
+            var smtp = new SmtpClient();
+            smtp.Send(mensaje);
+            return Redirect("/PlanesCliente");
+            
+        }
 
 
 
+        
     }
 }
 

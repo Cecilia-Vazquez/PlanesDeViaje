@@ -25,7 +25,17 @@ namespace PlanesDeViajes.Controllers
         }
 
 
-     
+        public ActionResult VerReservaciones()
+        {
+            List<ReservacionesViewModel> reservaciones;
+            using (PlanDeViajeEntities dbContext = new PlanDeViajeEntities())
+            {
+               reservaciones = dbContext.Reservaciones.AsEnumerable().Select(r=> new ReservacionesViewModel(r)).ToList();
+
+            }
+
+            return View(reservaciones);
+        }
         public ActionResult VerDetallesPlan()
         {
             List<DetallePlanViewModel> detalles;

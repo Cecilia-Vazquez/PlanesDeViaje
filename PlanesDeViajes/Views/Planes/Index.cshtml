@@ -13,13 +13,14 @@
 
     <a href="/DetallePlan/Index" class="btn bg-success"> Ver Hoteles</a>
 </div>
+
 <div class="row">
     <div class="col-md-12">
         <table class="table table-bordered">
             <tr>
                 <th>Id</th>
                 <th>Plan de viaje</th>
-           
+
                 <th>Cupo</th>
                 <th></th>
             </tr>
@@ -28,11 +29,11 @@
                 <tr>
                     <td>@plan.IdPlan</td>
                     <td>@plan.Nombre</td>
-            
+
                     <td>@plan.Cupo</td>
                     <td>
                         <a href="Planes/DetallesPlan?id=@plan.IdPlan" class="btn btn-primary">Agregar Detalles</a>
-                    
+
 
                         <a href="Planes/Editar/@plan.IdPlan" class="btn btn-warning">Modificar</a>
                         <a href="Planes/Eliminar/@plan.IdPlan" class="btn btn-danger">Eliminar</a>
@@ -43,6 +44,10 @@
             }
 
         </table>
+    </div>
+    <div style="text-align:right; padding:10px">
+
+        <a href="/Planes/VerReservaciones" class="btn btn-primary"> Reservaciones</a>
     </div>
 </div>
 
