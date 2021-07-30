@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Hoteles Disponibles";
+    List<PlanesDeViajes.Models.Plan_Detalle> items = ViewBag.items;
+  
+}
+<h1 class="h1" style="text-align:center;">@ViewBag.Title</h1>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Detalle</th>
+                <th>Hotel</th>
+                <th>Plan de viaje</th>
+             </tr>
+            @foreach (var detalle in items)
+            {
+                <tr>
+                    <td>@detalle.IdDetalle</td>
+                    <td>@detalle.IdHotel</td>
+                    <td>@detalle.Descripcion</td>
+                    <td>
+                        <a href="/PlanesCliente/VerDisponibilidad?id=@detalle.IdHotel&idplan=@detalle.IdDetalle" class="btn btn-success">Disponibilidad</a>
+                        
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

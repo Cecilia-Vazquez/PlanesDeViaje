@@ -1,0 +1,59 @@
+﻿
+
+@{
+    ViewBag.Title = "Verificar disponibilidad";
+    
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("VerDisponibilidad", "PlanesCliente", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+
+                <h4>Hotel</h4>
+                <input type="number" class="form-control" value="@ViewBag.id" name="idh" id="IdHotel" /><br />
+
+                <h4>Plan</h4>
+                <input type="number" class="form-control" value="@ViewBag.idplan" name="idp" id="IdPlan" /><br />
+
+
+            </div>
+            <div class="form-group">
+                <h4 >¿En que mes viajaras?</h4>
+                <select class="form-control" name="idmes" id="IdMes">
+                    <option value="1">Enero</option>
+                    <option value="2">Febrero</option>
+                    <option value="3">Marzo</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Mayo</option>
+                    <option value="6">Junio</option>
+                    <option value="7">Julio</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                  
+                  
+                </select>
+
+            </div>
+            <div class="form-group">
+                <h4 >¿En que año?</h4>
+                <input type="text"  class="form-control" placeholder="YYYY"  name="idao" id="IdAn" /><br />
+            </div>
+            <div style="text-align: right; padding:10px; ">
+                        <button class=" btn bg-success" type="submit">Ver Habitaciones</button>
+
+             </div>                   
+         </div>
+     </div>
+
+
+
+}
+

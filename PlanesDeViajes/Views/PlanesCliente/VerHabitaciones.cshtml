@@ -1,0 +1,48 @@
+﻿@model IEnumerable<PlanesDeViajes.APIs.Habitacion>
+
+@{
+    ViewBag.Title = "Habitaciones disponibles";
+}
+ 
+<h1> @ViewBag.Title</h1>
+
+<div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Id Habitacion
+            </th>
+            <th>
+                Tipo de Habitacion
+            </th>
+            <th>
+                Disponibilidad
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idRoom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.available)
+                </td>
+                <td>
+               
+                    <a href="/PlanesCliente/Reserva?idRoom=@item.idRoom&idplan=@ViewBag.idplan" class="btn btn-success">Reservar</a>
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
